@@ -1,0 +1,93 @@
+<div class="viewport-modal configSection">
+  <div class='row'>
+    <div class="col-xs-3 col-md-3">
+      <label for="Datahub URL">
+        {{'DataHub URL'}}
+      </label>
+      <input type="text" [(ngModel)]="config.datahubEndPoint">
+    </div>
+    <div class="col-xs-1 col-md-1 col-lg-1"></div>
+    <div class="col-xs-3 col-md-3">
+      <label for="Power BI URL">
+        {{'Power BI URL'}}
+      </label>
+      <input type="text" [(ngModel)]="config.powerBIEndPoint">
+    </div>
+  </div>
+  <div class='row'>
+    <div class="col-xs-3 col-md-3">
+      <label for="Embed URL">
+        {{'Embed URL'}}
+      </label>
+      <input type="text" [(ngModel)]="config.embedEndPoint">
+    </div>
+    <div class="col-xs-1 col-md-1 col-lg-1"></div>
+    <div class="col-xs-3 col-md-3">
+      <button (click)="setUrlAndGetWorkspace()" class="btn btn-primary" style="margin-top: 24px;
+      line-height: 14px;">
+        {{'Load Workspace'}}</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3 col-md-3">
+      <label class="c8y-checkbox checkbox-inline" title="isFilterPaneEnabled">
+        <input type="checkbox" value="Add Stack" [(ngModel)]="config.isFilterPaneEnabled"
+          >
+        <span></span>
+        <span>{{'Filter Pane'}}</span>
+      </label>
+    </div>
+    <div class="col-xs-1 col-md-1 col-lg-1"></div>
+    <div class="col-xs-3 col-md-3">
+      <label class="c8y-checkbox checkbox-inline" title="isNavPaneEnabled">
+        <input type="checkbox" value="Add Stack" [(ngModel)]="config.isNavPaneEnabled"
+          >
+        <span></span>
+        <span>{{'Nav Pane'}}</span>
+      </label>
+    </div>
+    
+  </div>
+  <div class="p-5 separator-bottom">
+    <p class="lead m-0">{{'Select Workspace and Report.' }}</p>
+  </div>
+  <form [formGroup]="form">
+    <c8y-form-group>
+      <label for="workspace">
+        {{'Workspace'}}
+      </label>
+      <div class="c8y-select-wrapper">
+        <select formControlName="workspace" name="workspace" id="workspace">
+          <option *ngFor="let workspace of workspaces" [ngValue]="workspace">
+            {{ workspace.name }}
+          </option>
+        </select>
+      </div>
+    </c8y-form-group>
+    <c8y-form-group>
+      <label for="report">
+        {{'Report' }}
+      </label>
+      <div *ngIf="visibleReports?.length === 0 || error || isLoading; else reportsSelect">
+        <c8y-loading *ngIf="isLoading"></c8y-loading>
+        <em *ngIf="!error && !isLoading; else errorMessage"> No reports available for chosen workspace</em>
+        <ng-template #errorMessage>
+          <div *ngIf="error && !isLoading">
+            <i [c8yIcon]="'warning'" class="m-r-4 text-danger"></i>
+            <em>{{ error }}</em>
+          </div>
+        </ng-template>
+      </div>
+      <ng-template #reportsSelect>
+        <div class="c8y-select-wrapper">
+          <select formControlName="report" name="report" id="report">
+            <option *ngFor="let report of visibleReports" [ngValue]="report">
+              {{ report.name }}
+            </option>
+          </select>
+        </div>
+      </ng-template>
+    </c8y-form-group>
+  </form>
+
+</div>
