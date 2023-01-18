@@ -25,9 +25,9 @@ describe('GpPowerbiConfigComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GpPowerbiConfigComponent ]
+      declarations: [GpPowerbiConfigComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

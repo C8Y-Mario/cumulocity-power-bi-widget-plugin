@@ -1,10 +1,10 @@
 {
   "name": "cumulocity-power-bi-widget-plugin",
-  "version": "1.0.1-beta",
-  "description": "This is the Cumulocity module federation plugin. Plugins can be developed like any Cumulocity application, but can be used at runtime by other applications. Therefore, they export an Angular module which can then be imported by any other application. The exports are defined in `package.json`:",
+  "version": "1.0.0-beta",
+  "description": "The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.",
   "scripts": {
     "start": "c8ycli server",
-    "build": "c8ycli build --env.mode=development",
+    "build": "c8ycli build",
     "deploy": "c8ycli deploy",
     "postinstall": "ngcc",
     "prebuild": " gulp clean",
@@ -55,21 +55,24 @@
   "c8y": {
     "application": {
       "name": "Cumulocity Power BI Widget Plugin",
-      "description": "Cumulocity Power BI widget with module federation",
+      "description": "The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.",
       "contextPath": "powerbi-runtime-widget",
       "key": "powerbi-runtime-widget-application-key",
-      "globalTitle": "Cumulocity PowerBI widget with Module Federation",
+      "globalTitle": "The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.",
       "tabsHorizontal": true,
       "isPackage": true,
       "noAppSwitcher": true,
       "package": "plugin",
       "requiredPlatformVersion": ">=1016.0.0",
+      "icon": {
+        "class": "fa fa-overview"
+      },
       "exports": [
         {
           "name": "Cumulocity Power BI Widget Plugin",
           "module": "GpPowerbiWidgetModule",
           "path": "./widget/gp-powerbi-widget.module.ts",
-          "description": "This widget displays the PowerBI reports created from Datahub offloading."
+          "description": "The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application."
         }
       ],
       "remotes": {

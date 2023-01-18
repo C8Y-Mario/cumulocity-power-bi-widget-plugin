@@ -24,7 +24,7 @@ export type CachedPowerBIInfo = {
   activeToken: string;
   settings: PowerBISettings;
 };
-@Injectable({providedIn:'root'})
+@Injectable({ providedIn: 'root' })
 export class PowerBIService {
   private static readonly cachedInfoDefault: CachedPowerBIInfo = {
     reports: [],
@@ -34,7 +34,7 @@ export class PowerBIService {
   public path = '';
   private configRequested = false;
   public cachedInfo: CachedPowerBIInfo = JSON.parse(JSON.stringify(PowerBIService.cachedInfoDefault));
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService) { }
   // Irrelevant for customer scenario, only used to load the navigator node once, if settings are defined
   public setConfigRequestState(): void {
     this.configRequested = true;
@@ -81,7 +81,7 @@ export class PowerBIService {
     };
     return await this.http.Get(url, params);
   }
-  flushCache(): any{
+  flushCache(): any {
     this.cachedInfo = JSON.parse(JSON.stringify(PowerBIService.cachedInfoDefault));
   }
 }

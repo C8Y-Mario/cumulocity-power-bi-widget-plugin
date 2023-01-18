@@ -17,7 +17,7 @@
  */
 import { Injectable } from '@angular/core';
 import { FetchClient, IFetchResponse } from '@c8y/client';
-@Injectable({providedIn:'root'})
+@Injectable({ providedIn: 'root' })
 export class HttpService {
     public path: string = null;
     constructor(private fetchClient: FetchClient) {
@@ -25,17 +25,17 @@ export class HttpService {
     }
     async Get<T>(endPoint: string, params?: object, headers = { accept: 'application/json' }): Promise<IFetchResponse> {
         const method = 'GET';
-        const options = {method, headers, params};
+        const options = { method, headers, params };
         return this.fetchClient.fetch(this.getEndPoint(endPoint), options);
     }
     async Head<T>(endPoint: string, params?: object, headers = { accept: 'application/json' }): Promise<IFetchResponse> {
         const method = 'HEAD';
-        const options = {method, headers, params};
+        const options = { method, headers, params };
         return this.fetchClient.fetch(this.getEndPoint(endPoint), options);
     }
     async Post<T>(endPoint: string,
-                  body: object, params?: object,
-                  headers = { accept: 'application/json' }): Promise<IFetchResponse> {
+        body: object, params?: object,
+        headers = { accept: 'application/json' }): Promise<IFetchResponse> {
         return this.fetchClient.fetch(this.getEndPoint(endPoint), {
             method: 'POST',
             body: JSON.stringify(body),
@@ -44,10 +44,10 @@ export class HttpService {
         });
     }
     async Delete<T>(endPoint: string,
-                    params?: object,
-                    headers = { accept: 'application/json' }): Promise<IFetchResponse> {
+        params?: object,
+        headers = { accept: 'application/json' }): Promise<IFetchResponse> {
         const method = 'DELETE';
-        const options = {method, headers, params};
+        const options = { method, headers, params };
         return this.fetchClient.fetch(this.getEndPoint(endPoint), options);
     }
     private getEndPoint(endPoint: string): string {

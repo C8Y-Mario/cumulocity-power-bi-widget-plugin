@@ -1,13 +1,13 @@
-# Power BI Widget for Cumulocity [<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>]
+# Power BI Widget for Cumulocity [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>]
 
 
-This Power BI widget is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. The Power BI widget help you to display reports created from data offloaded from DataHub seamlessly in application.
+This Power BI widget is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.
 
 ### Please note that this plugin is in currently under BETA mode.
 
-### Please choose Smart Map release based on Cumulocity/Application builder version:
+### Please choose Power BI release based on Cumulocity/Application builder version:
 
-|APPLICATION BUILDER | CUMULOCITY | SMART MAP WIDGET |
+|APPLICATION BUILDER | CUMULOCITY | POWER BI WIDGET  |
 |--------------------|------------|------------------|
 | 2.x.x(coming soon) | >= 1016.x.x| 1.x.x            | 
 
