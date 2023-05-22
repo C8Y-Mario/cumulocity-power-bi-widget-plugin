@@ -1,5 +1,4 @@
-# Power BI Widget for Cumulocity [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/SoftwareAG/cumulocity-power-bi-widget-plugin/releases/download/1.0.0-beta/powerbi-runtime-widget-1.0.0-beta.zip)
-
+# Power BI Widget for Cumulocity [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/SoftwareAG/cumulocity-power-bi-widget-plugin/releases/download/1.0.0/sag-ps-pkg-powerbi-runtime-widget-1.0.0.zip)
 
 This Power BI widget is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.
 
@@ -44,7 +43,7 @@ https://cumulocity.com/guides/datahub/datahub-overview/
 
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-power-bi-widget-plugin/releases/download/1.0.0-beta/powerbi-runtime-widget-1.0.0-beta.zip) and install via Administrations --> Ecosystems --> Applications --> Packages.
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-power-bi-widget-plugin/releases/download/1.0.0/sag-ps-pkg-powerbi-runtime-widget-1.0.0.zip) and install via Administrations --> Ecosystems --> Applications --> Packages.
 
 
 ## QuickStart
