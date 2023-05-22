@@ -3,15 +3,14 @@
 
 This Power BI widget is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.
 
-### Please note that this plugin is in currently under BETA mode.
-
 ### Please choose Power BI release based on Cumulocity/Application builder version:
 
 |APPLICATION BUILDER | CUMULOCITY | POWER BI WIDGET  |
 |--------------------|------------|------------------|
-| 2.x.x(coming soon) | >= 1016.x.x| 1.x.x            | 
+| 2.x.x              | >= 1016.x.x| 1.x.x            | 
 
-![Power_BI](https://user-images.githubusercontent.com/99970126/181720578-e55d7911-bad6-4932-a27c-14232d1647b3.png)
+
+![Image](img/powerbi.png)
 
 ![Power_BI_Config](https://user-images.githubusercontent.com/99970126/181721134-5517d55a-56fe-4eff-8073-37e3559914b2.png)
 
@@ -42,7 +41,7 @@ https://cumulocity.com/guides/datahub/datahub-overview/
 
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-power-bi-widget-plugin/releases/download/1.0.0-beta/powerbi-runtime-widget-1.0.0-beta.zip) and install via Administrations(Beta mode) --> Ecosystems --> Applications --> Packages.
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-power-bi-widget-plugin/releases/download/1.0.0-beta/powerbi-runtime-widget-1.0.0-beta.zip) and install via Administrations --> Ecosystems --> Applications --> Packages.
 
 
 ## QuickStart

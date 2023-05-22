@@ -1,6 +1,6 @@
 {
   "name": "cumulocity-power-bi-widget-plugin",
-  "version": "1.0.0-beta",
+  "version": "1.0.0",
   "description": "The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.",
   "scripts": {
     "start": "c8ycli server",
@@ -54,10 +54,10 @@
   },
   "c8y": {
     "application": {
-      "name": "Cumulocity Power BI Widget Plugin",
+      "name": "Power BI Widget",
       "description": "The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.",
-      "contextPath": "powerbi-runtime-widget",
-      "key": "powerbi-runtime-widget-application-key",
+      "contextPath": "sag-ps-pkg-powerbi-runtime-widget",
+      "key": "sag-ps-pkg-powerbi-runtime-widget-application-key",
       "globalTitle": "The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.",
       "tabsHorizontal": true,
       "isPackage": true,
@@ -69,7 +69,7 @@
       },
       "exports": [
         {
-          "name": "Cumulocity Power BI Widget Plugin",
+          "name": "Power BI Widget",
           "module": "GpPowerbiWidgetModule",
           "path": "./widget/gp-powerbi-widget.module.ts",
           "description": "The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application."
