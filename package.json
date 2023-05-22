@@ -79,7 +79,22 @@
         "widget-plugin": [
           "GpPowerbiWidgetModule"
         ]
-      }
+      },
+      "copy": [
+        {
+          "from": "img/powerbi.png",
+          "to": "img/powerbi.png"
+        },
+        {
+          "from": "img/powerbiconfig.png",
+          "to": "img/powerbiconfig.png"
+        },
+        
+        {
+          "from": "LICENSE",
+          "to": "LICENSE.txt"
+        }
+      ]
     },
     "cli": {}
   },
