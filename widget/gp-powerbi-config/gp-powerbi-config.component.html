@@ -1,27 +1,30 @@
 <div class="viewport-modal configSection">
   <div class='row'>
-    <div class="col-xs-3 col-md-3">
-      <label for="Datahub URL">
+    <div class="col-xs-12 col-md-6">
+      <label class="col-md-4" for="Datahub URL">
         {{'DataHub URL'}}
       </label>
-      <input type="text" [(ngModel)]="config.datahubEndPoint">
+      <input class="col-md-6" type="text" [(ngModel)]="config.datahubEndPoint">
+      <div class="col-md-2"></div>
     </div>
     <div class="col-xs-1 col-md-1 col-lg-1"></div>
-    <div class="col-xs-3 col-md-3">
-      <label for="Power BI URL">
+    <div class="col-xs-12 col-md-6">
+      <label class="col-md-4" for="Power BI URL">
         {{'Power BI URL'}}
       </label>
-      <input type="text" [(ngModel)]="config.powerBIEndPoint">
+      <input class="col-md-6" type="text" [(ngModel)]="config.powerBIEndPoint">
+      <div class="col-md-2"></div>
     </div>
   </div>
   <div class='row'>
-    <div class="col-xs-3 col-md-3">
-      <label for="Embed URL">
+    <div class="col-xs-12 col-md-6">
+      <label class="col-md-4" style="padding-right: 5%" for="Embed URL">
         {{'Embed URL'}}
       </label>
-      <input type="text" [(ngModel)]="config.embedEndPoint">
+      <input class="col-md-6" type="text" [(ngModel)]="config.embedEndPoint">
+      <div class="col-md-2"></div>
     </div>
-    <div class="col-xs-1 col-md-1 col-lg-1"></div>
+    <div class="col-xs-12 col-md-1 col-lg-6"></div>
     <div class="col-xs-3 col-md-3">
       <button (click)="setUrlAndGetWorkspace()" class="btn btn-primary" style="margin-top: 24px;
       line-height: 14px;">
