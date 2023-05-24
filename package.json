@@ -1,6 +1,6 @@
 {
   "name": "cumulocity-power-bi-widget-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.",
   "scripts": {
     "start": "c8ycli server",
