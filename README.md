@@ -8,13 +8,10 @@ This Power BI widget is the Cumulocity module federation plugin created using c8
 |--------------------|------------|------------------|
 | 2.x.x              | >= 1016.x.x| 1.x.x            | 
 
-
 ![Image](img/powerbi.png)
 
 
 ![Image](img/powerbiconfig.png)
-
-
 
 ## Features
 
