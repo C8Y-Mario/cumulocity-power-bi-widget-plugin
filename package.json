@@ -89,6 +89,7 @@
           "from": "img/powerbiconfig.png",
           "to": "img/powerbiconfig.png"
         },
+        
         {
           "from": "LICENSE",
           "to": "LICENSE.txt"
