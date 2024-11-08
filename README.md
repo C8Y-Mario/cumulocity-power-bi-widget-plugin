@@ -1,4 +1,9 @@
-# Power BI Widget for Cumulocity [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/SoftwareAG/cumulocity-power-bi-widget-plugin/releases/download/1.0.1/sag-ps-pkg-powerbi-runtime-widget-1.0.1.zip)
+# Deprecation notice
+This plugin is not further developed and it might break with upcoming Cumulocity releases. Use it at your own risk.
+
+The repository is archived but feel free to fork & adapt it to your needs in a new repo.
+
+# Power BI Widget for Cumulocity [<img width="35" src="https://user-images.githubusercontent.com/32765455/211497905-561e9197-18b9-43d5-a023-071d3635f4eb.png"/>](https://github.com/SoftwareAG/cumulocity-power-bi-widget-plugin/releases/download/1.0.2/sag-ps-pkg-powerbi-runtime-widget-1.0.2.zip)
 
 This Power BI widget is the Cumulocity module federation plugin created using c8ycli. This plugin can be used in Application Builder or Cockpit. The Power BI widget helps you to display reports created from data offloaded from DataHub seamlessly in application.
 
@@ -42,7 +47,7 @@ https://cumulocity.com/guides/datahub/datahub-overview/
 
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-power-bi-widget-plugin/releases/download/1.0.1/sag-ps-pkg-powerbi-runtime-widget-1.0.1.zip) and install via Administrations --> Ecosystems --> Applications --> Packages.
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-power-bi-widget-plugin/releases/download/1.0.2/sag-ps-pkg-powerbi-runtime-widget-1.0.2.zip) and install via Administrations --> Ecosystems --> Applications --> Packages.
 
 
 ## QuickStart
@@ -107,19 +112,12 @@ NOTE : By default, first workspace and first report under that workspace comes s
 
 ------------------------------
 
-  
 
-This widget is provided as-is and without warranty or support. They do not constitute part of the Software AG product suite. Users are free to use, fork and modify them, subject to the license agreement. While Software AG welcomes contributions, we cannot guarantee to include every contribution in the master project.
 
+This widget is provided as-is and without warranty or support. They do not constitute part of the Cumulocity product suite. Users are free to use, fork and modify them, subject to the license agreement. While Cumulocity GmbH welcomes contributions, we cannot guarantee to include every contribution in the master project.
   
 
 _____________________
 
   
 
-For more information you can Ask a Question in the [TECHcommunity Forums](https://tech.forums.softwareag.com/tag/Cumulocity-IoT).
-
-  
-  
-
-You can find additional information in the [Software AG TECHcommunity](https://techcommunity.softwareag.com/home/-/product/name/cumulocity).
