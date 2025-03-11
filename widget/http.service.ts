@@ -23,10 +23,14 @@ export class HttpService {
     constructor(private fetchClient: FetchClient) {
         this.path = '';
     }
-    async Get<T>(endPoint: string, params?: object, headers = { accept: 'application/json' }): Promise<IFetchResponse> {
+    async Get<T>(endPoint: string, params?: object, headers = { accept: 'application/json' }): Promise<T> {
         const method = 'GET';
         const options = { method, headers, params };
-        return this.fetchClient.fetch(this.getEndPoint(endPoint), options);
+        const response = await this.fetchClient.fetch(this.getEndPoint(endPoint), options);
+        if (!response.ok) {
+            throw new Error(response.statusText)
+        }
+        return await response.json() as T;
     }
     async Head<T>(endPoint: string, params?: object, headers = { accept: 'application/json' }): Promise<IFetchResponse> {
         const method = 'HEAD';

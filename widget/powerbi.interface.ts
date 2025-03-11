@@ -49,3 +49,13 @@ export type PowerBIWorkspace = {
   name: string;
   type: 'Workspace' | string;
 };
+
+export type PowerBIApiResponse<T> = {
+  status: string
+  data: T
+  messages: string[]
+}
+
+export type PowerBIToken = {
+  token: string
+}

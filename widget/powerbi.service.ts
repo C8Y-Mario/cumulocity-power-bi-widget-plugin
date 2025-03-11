@@ -18,7 +18,7 @@
 import { Injectable } from '@angular/core';
 import { IFetchResponse } from '@c8y/client';
 import { HttpService } from './http.service';
-import { PowerBIReports, PowerBISettings } from './powerbi.interface';
+import {PowerBIApiResponse, PowerBIReports, PowerBISettings, PowerBIToken, PowerBIWorkspace} from './powerbi.interface';
 export type CachedPowerBIInfo = {
   reports: PowerBIReports;
   activeToken: string;
@@ -60,26 +60,39 @@ export class PowerBIService {
     return await this.http.Delete(url, params);
   }
   // May not be needed in customer scenario
-  async listWorkspaces(): Promise<IFetchResponse> {
+  async listWorkspaces(): Promise<PowerBIWorkspace[]> {
     const url = `${this.path}/groups`;
-    return await this.http.Get(url);
+    const powerBIWorkspaceResponse: PowerBIApiResponse<PowerBIWorkspace[]> = await this.http.Get(url);
+    if (powerBIWorkspaceResponse.status != 'SUCCEEDED') {
+      return [];
+    }
+    return powerBIWorkspaceResponse.data;
   }
   // May not be needed in customer scenario
-  async listReports(workspaceId: string): Promise<IFetchResponse> {
+  async listReports(workspaceId: string): Promise<PowerBIReports> {
     const url = `${this.path}/reports`;
     const params = {
       groupId: workspaceId
     };
-    return await this.http.Get(url, params);
+    const powerBiReportsResponse: PowerBIApiResponse<PowerBIReports> = await this.http.Get(url, params);
+    if (powerBiReportsResponse.status != 'SUCCEEDED') {
+      return [];
+    }
+    return powerBiReportsResponse.data;
   }
+
   // This is where the embeddingToken is requested
-  async embedReport(workspaceId: string, reportId: string): Promise<IFetchResponse> {
+  async embedReport(workspaceId: string, reportId: string): Promise<string> {
     const url = `${this.path}/embedReport`;
     const params = {
       groupId: workspaceId,
       reportId
     };
-    return await this.http.Get(url, params);
+    const s: PowerBIApiResponse<PowerBIToken> = await this.http.Get(url, params);
+    if (s.status != 'SUCCEEDED') {
+      return null;
+    }
+    return s.data.token;
   }
   flushCache(): any {
     this.cachedInfo = JSON.parse(JSON.stringify(PowerBIService.cachedInfoDefault));
