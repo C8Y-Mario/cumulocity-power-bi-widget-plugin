@@ -1,6 +1,4 @@
 /**
- * Copyright (c) 2021 Software AG, Darmstadt, Germany and/or its licensors
- *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +17,7 @@ import { Injectable } from '@angular/core';
 import { FetchClient, IFetchResponse } from '@c8y/client';
 @Injectable({ providedIn: 'root' })
 export class HttpService {
-    public path: string = null;
+    public path?: string = undefined;
     constructor(private fetchClient: FetchClient) {
         this.path = '';
     }

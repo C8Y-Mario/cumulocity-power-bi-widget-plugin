@@ -1,6 +1,4 @@
 /**
- * Copyright (c) 2021 Software AG, Darmstadt, Germany and/or its licensors
- *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +14,7 @@
  * limitations under the License.
  */
 import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {AlertService, AppStateService} from '@c8y/ngx-components';
+import {AlertService} from '@c8y/ngx-components';
 import * as pbiClient from 'powerbi-client';
 import {HttpService} from './http.service';
 import {EmbeddingInfo} from './powerbi.interface';
@@ -35,27 +33,27 @@ export class GpPowerbiWidgetComponent implements OnInit, OnChanges {
     pbiClient.factories.wpmpFactory,
     pbiClient.factories.routerFactory
   );
-  @ViewChild('reportContainer', { static: true }) reportContainer: ElementRef;
-  embeddingInfo: EmbeddingInfo;
-  reportName: string;
-  workspaceID;
-  reportID;
-  @Input() config: ConfigType;
+  @ViewChild('reportContainer', { static: true }) reportContainer!: ElementRef;
+  embeddingInfo?: EmbeddingInfo;
+  reportName?: string;
+  workspaceID?: string;
+  reportID?: string;
+
+  @Input() config!: ConfigType;
   embedUrl = 'https://app.powerbi.com/reportEmbed';
   embeddedReport: any;
-  reportToDisplay: { id: string; workspaceId: string; token: string; name: string; };
-  countries = "all"
+  reportToDisplay?: { id: string; workspaceId: string; token: string; name: string; };
+
   constructor(
     private powerbiService: PowerBIService,
     private alertService: AlertService,
-    private appService: AppStateService,
     private http: HttpService,
   ) {
   }
   // When changes are pushed from host component to report component, component is reinitialized to show a different report.
   // This may not be needed in customer scenario
   async ngOnChanges(changes: SimpleChanges): Promise<void> {
-    if (changes.embeddingInfo && changes.embeddingInfo.currentValue) {
+    if (changes["embeddingInfo"] && changes["embeddingInfo"].currentValue) {
       await this.ngOnInit();
     }
   }
@@ -73,15 +71,16 @@ export class GpPowerbiWidgetComponent implements OnInit, OnChanges {
       this.alertService.danger('Failed to load report.');
     }
     try {
-      // tslint:disable-next-line:max-line-length
-      this.embedReport(this.embeddingInfo.reportId, this.embeddingInfo.embeddingToken, this.config.isFilterPaneEnabled, this.config.isNavPaneEnabled);
+      if (this.embeddingInfo) {
+        this.embedReport(this.embeddingInfo.reportId, this.embeddingInfo.embeddingToken, this.config.isFilterPaneEnabled, this.config.isNavPaneEnabled);
+      }
     } catch (e) {
       this.alertService.danger('Failed to fetch embedding token.');
     }
   }
 
   // This is where the Power BI client is actually used - parametrize the config however you like
-  private embedReport(reportId: any, token: string, filterPanelEnabled: boolean, navPanelEnabled?: boolean): any {
+  private embedReport(reportId: any, token: string, filterPaneEnabled: boolean, navPaneEnabled: boolean): any {
       const embedConfig: pbiClient.models.IReportEmbedConfiguration = {
         type: 'report',
         id: reportId,
@@ -90,10 +89,8 @@ export class GpPowerbiWidgetComponent implements OnInit, OnChanges {
         accessToken: token,
         // permissions: pbi.models.Permissions.Read,
         settings: {
-          // The option is called filterPaneEnabled, there is a typo in the method parameter name
-          filterPaneEnabled: filterPanelEnabled,
-          // Same as filterPaneEnabled
-          navContentPaneEnabled: navPanelEnabled,
+          filterPaneEnabled: filterPaneEnabled,
+          navContentPaneEnabled: navPaneEnabled,
           background: pbiClient.models.BackgroundType.Transparent
         }
       };
@@ -107,10 +104,13 @@ export class GpPowerbiWidgetComponent implements OnInit, OnChanges {
   }
   // Load the report based on workspace selected
   // sets the report ID and token
-  private async loadReport(config): Promise<any> {
+  private async loadReport(config: ConfigType): Promise<any> {
+    if (config.report == null || config.workspace == null) {
+      throw Error('Report or Workspace not set')
+    }
     this.workspaceID = config.workspace;
-    this.reportID = config.report.id;
-    this.reportName = config.report.name;
+    this.reportID = config.report?.id;
+    this.reportName = config.report?.name;
     const token = await this.getToken(this.reportID, this.workspaceID, this.reportName);
     if (token) {
       this.embeddingInfo = {
@@ -121,19 +121,20 @@ export class GpPowerbiWidgetComponent implements OnInit, OnChanges {
     // cache set the token
   }
   // Fetch the token for selected report and workspace
-  private async getToken(reportId: string, workspaceId: string, reportName): Promise<string> {
+  private async getToken(reportId: string, workspaceId: string, reportName: string): Promise<string | undefined> {
     try {
-    const token = await this.powerbiService.embedReport(this.workspaceID, this.reportID);
-    this.embeddedReport = token;
-    this.reportToDisplay = {
-      id: reportId,
-      workspaceId,
-      token: token,
-      name: reportName
-    };
-    return token;
+      const token = await this.powerbiService.embedReport(workspaceId, reportId);
+      this.embeddedReport = token;
+      this.reportToDisplay = {
+        id: reportId,
+        workspaceId,
+        token: token,
+        name: reportName
+      };
+      return token;
     } catch (e) {
       this.alertService.danger('An error occurred while fetching the embedding token for the report.');
     }
+    return undefined;
   }
 }

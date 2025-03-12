@@ -1,6 +1,4 @@
 /**
- * Copyright (c) 2021 Software AG, Darmstadt, Germany and/or its licensors
- *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,14 +20,14 @@ import {PowerBIApiResponse, PowerBIReports, PowerBISettings, PowerBIToken, Power
 export type CachedPowerBIInfo = {
   reports: PowerBIReports;
   activeToken: string;
-  settings: PowerBISettings;
+  settings?: PowerBISettings;
 };
 @Injectable({ providedIn: 'root' })
 export class PowerBIService {
   private static readonly cachedInfoDefault: CachedPowerBIInfo = {
     reports: [],
     activeToken: '',
-    settings: null
+    settings: undefined
   };
   public path = '';
   private configRequested = false;
@@ -90,7 +88,7 @@ export class PowerBIService {
     };
     const s: PowerBIApiResponse<PowerBIToken> = await this.http.Get(url, params);
     if (s.status != 'SUCCEEDED') {
-      return null;
+      throw 'Could not load token';
     }
     return s.data.token;
   }

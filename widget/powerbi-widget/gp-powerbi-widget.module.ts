@@ -1,6 +1,4 @@
 /**
- * Copyright (c) 2021 Software AG, Darmstadt, Germany and/or its licensors
- *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { NgModule } from '@angular/core';
-import { HOOK_COMPONENTS, CoreModule, FormsModule as c8yFormsModule } from '@c8y/ngx-components';
-import { GpPowerbiWidgetComponent } from './gp-powerbi-widget.component';
-import { HttpService } from './http.service';
-import { PowerBIService } from './powerbi.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { GpPowerbiConfigComponent } from './gp-powerbi-config/gp-powerbi-config.component';
+import {NgModule} from '@angular/core';
+import {CoreModule, FormsModule as c8yFormsModule, hookComponent} from '@c8y/ngx-components';
+import {GpPowerbiWidgetComponent} from './gp-powerbi-widget.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {CollapseModule} from 'ngx-bootstrap/collapse';
+import {GpPowerbiConfigComponent} from './gp-powerbi-config/gp-powerbi-config.component';
 import * as preview from './preview-image';
 
 @NgModule({
@@ -32,10 +28,7 @@ import * as preview from './preview-image';
     CoreModule, CollapseModule, RouterModule, c8yFormsModule, ReactiveFormsModule
   ],
   providers: [
-    {
-      provide: HOOK_COMPONENTS,
-      multi: true,
-      useValue: {
+    hookComponent({
         id: 'powerbi.widget',
         label: 'Power BI Widget',
         description: 'Display Power BI Reports created from DataHub',
@@ -52,9 +45,7 @@ import * as preview from './preview-image';
             },
           }
         }
-      }
-    }],
-  exports: [GpPowerbiWidgetComponent, GpPowerbiConfigComponent],
-  entryComponents: [GpPowerbiWidgetComponent, GpPowerbiConfigComponent]
+    })],
+  exports: [GpPowerbiWidgetComponent, GpPowerbiConfigComponent]
 })
 export class GpPowerbiWidgetModule { }

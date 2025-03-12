@@ -38,10 +38,10 @@ export interface ConfigType {
 })
 export class GpPowerbiConfigComponent implements OnInit {
 
-  @Input() config: ConfigType
+  @Input() config!: ConfigType
   public workspaces: PowerBIWorkspace[];
   public reports: {[key:string]:PowerBIReports};
-  public visibleReports: PowerBIReports;
+  public visibleReports?: PowerBIReports;
   public form: FormGroup;
   public isLoading = false;
 
@@ -60,8 +60,11 @@ export class GpPowerbiConfigComponent implements OnInit {
     this.reports = {};
   }
   async ngOnInit(): Promise<void> {
-    if (!this.config.isNavPaneEnabled) {
+    if (this.config.isNavPaneEnabled == null) {
       this.config.isNavPaneEnabled = false;
+    }
+    if (this.config.isFilterPaneEnabled == null) {
+      this.config.isFilterPaneEnabled = false;
     }
     if (this.config.powerBIEndPoint === '' || this.config.powerBIEndPoint === undefined) {
       this.config.powerBIEndPoint = '/powerbi';
@@ -116,27 +119,29 @@ export class GpPowerbiConfigComponent implements OnInit {
   // workspace and report
   initForm(): any {
     const selectedWorkspace: string = this.config.workspace ?? this.workspaces[0]?.id;
-    if (selectedWorkspace && this.workspaces.find((workspace) => workspace.id === selectedWorkspace)) {
-      this.form.controls['workspace'].setValue(selectedWorkspace);
+    this.config.workspace = selectedWorkspace;
+    let powerBIWorkspace = this.workspaces.find((workspace) => workspace.id === selectedWorkspace);
+    if (selectedWorkspace && powerBIWorkspace) {
+      this.form.controls['workspace'].setValue(powerBIWorkspace);
       this.visibleReports = this.reports[selectedWorkspace];
-      if (this.config.report && this.reports[selectedWorkspace].find((report) => report.id === this.config.report.id)) {
+      if (this.config.report && this.reports[selectedWorkspace].find((report) => report.id === this.config.report?.id)) {
         this.form.controls['report'].setValue(this.config.report)
       }
     }
 
-    this.form.controls.workspace.valueChanges.subscribe(async (workspaceValue: PowerBIWorkspace) => {
+    this.form.controls["workspace"].valueChanges.subscribe(async (workspaceValue: PowerBIWorkspace) => {
       const workspaceId = workspaceValue.id;
       try {
         this.error = '';
         this.isLoading = true;
         this.reports[workspaceId] = await this.powerbiService.listReports(workspaceId);
         if (this.reports[workspaceId].length > 0) {
-          this.form.controls.report.setValue(this.reports[workspaceId][0]);
+          this.form.controls["report"].setValue(this.reports[workspaceId][0]);
         } else {
-          this.form.controls.report.setValue(null);
+          this.form.controls["report"].setValue(null);
         }
         this.visibleReports = this.reports[workspaceId];
-        this.config.workspace = this.form.controls.workspace.value;
+        this.config.workspace = this.form.controls["workspace"].value;
       } catch (e) {
         this.error = 'Fetching reports for workspace failed.';
       } finally {
@@ -144,7 +149,7 @@ export class GpPowerbiConfigComponent implements OnInit {
       }
     });
     // Form change on report selection
-    this.form.controls.report.valueChanges.subscribe((reportValue: PowerBIReport) => {
+    this.form.controls["report"].valueChanges.subscribe((reportValue: PowerBIReport) => {
       this.config.report = reportValue;
     });
   }
