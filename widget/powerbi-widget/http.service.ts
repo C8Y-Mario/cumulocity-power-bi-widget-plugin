@@ -1,6 +1,4 @@
 /**
- * Copyright (c) 2021 Software AG, Darmstadt, Germany and/or its licensors
- *
  * SPDX-License-Identifier: Apache-2.0
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,14 +17,18 @@ import { Injectable } from '@angular/core';
 import { FetchClient, IFetchResponse } from '@c8y/client';
 @Injectable({ providedIn: 'root' })
 export class HttpService {
-    public path: string = null;
+    public path?: string = undefined;
     constructor(private fetchClient: FetchClient) {
         this.path = '';
     }
-    async Get<T>(endPoint: string, params?: object, headers = { accept: 'application/json' }): Promise<IFetchResponse> {
+    async Get<T>(endPoint: string, params?: object, headers = { accept: 'application/json' }): Promise<T> {
         const method = 'GET';
         const options = { method, headers, params };
-        return this.fetchClient.fetch(this.getEndPoint(endPoint), options);
+        const response = await this.fetchClient.fetch(this.getEndPoint(endPoint), options);
+        if (!response.ok) {
+            throw new Error(response.statusText)
+        }
+        return await response.json() as T;
     }
     async Head<T>(endPoint: string, params?: object, headers = { accept: 'application/json' }): Promise<IFetchResponse> {
         const method = 'HEAD';

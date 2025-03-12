@@ -1,27 +1,27 @@
 <div class="viewport-modal configSection">
   <div class='row'>
     <div class="col-xs-12 col-md-6">
-      <label class="col-md-4" for="Datahub URL">
+      <label class="col-md-4" for="DatahubURL">
         {{'DataHub URL'}}
       </label>
-      <input class="col-md-6" type="text" [(ngModel)]="config.datahubEndPoint">
+      <input class="col-md-6" type="text" [(ngModel)]="config.datahubEndPoint" id="DatahubURL">
       <div class="col-md-2"></div>
     </div>
     <div class="col-xs-1 col-md-1 col-lg-1"></div>
     <div class="col-xs-12 col-md-6">
-      <label class="col-md-4" for="Power BI URL">
+      <label class="col-md-4" for="PowerBIURL">
         {{'Power BI URL'}}
       </label>
-      <input class="col-md-6" type="text" [(ngModel)]="config.powerBIEndPoint">
+      <input class="col-md-6" type="text" [(ngModel)]="config.powerBIEndPoint" id="PowerBIURL">
       <div class="col-md-2"></div>
     </div>
   </div>
   <div class='row'>
     <div class="col-xs-12 col-md-6">
-      <label class="col-md-4" style="padding-right: 5%" for="Embed URL">
+      <label class="col-md-4" style="padding-right: 5%" for="EmbedURL">
         {{'Embed URL'}}
       </label>
-      <input class="col-md-6" type="text" [(ngModel)]="config.embedEndPoint">
+      <input class="col-md-6" type="text" [(ngModel)]="config.embedEndPoint" id="EmbedURL">
       <div class="col-md-2"></div>
     </div>
     <div class="col-xs-12 col-md-1 col-lg-6"></div>
@@ -36,7 +36,7 @@
       <label class="c8y-checkbox checkbox-inline" title="isFilterPaneEnabled">
         <input type="checkbox" value="Add Stack" [(ngModel)]="config.isFilterPaneEnabled">
         <span></span>
-        <span>{{'Filter Pane'}}</span>
+        <span>{{'Show Filter Pane'}}</span>
       </label>
     </div>
     <div class="col-xs-1 col-md-1 col-lg-1"></div>
@@ -44,7 +44,7 @@
       <label class="c8y-checkbox checkbox-inline" title="isNavPaneEnabled">
         <input type="checkbox" value="Add Stack" [(ngModel)]="config.isNavPaneEnabled">
         <span></span>
-        <span>{{'Nav Pane'}}</span>
+        <span>{{'Show Nav Pane'}}</span>
       </label>
     </div>
 
@@ -58,7 +58,7 @@
         {{'Workspace'}}
       </label>
       <div class="c8y-select-wrapper">
-        <select formControlName="workspace" name="workspace" id="workspace">
+        <select formControlName="workspace" name="workspace" id="workspace" [compareWith]="byId">
           <option *ngFor="let workspace of workspaces" [ngValue]="workspace">
             {{ workspace.name }}
           </option>
@@ -81,7 +81,7 @@
       </div>
       <ng-template #reportsSelect>
         <div class="c8y-select-wrapper">
-          <select formControlName="report" name="report" id="report">
+          <select formControlName="report" name="report" id="report" [compareWith]="byId">
             <option *ngFor="let report of visibleReports" [ngValue]="report">
               {{ report.name }}
             </option>
