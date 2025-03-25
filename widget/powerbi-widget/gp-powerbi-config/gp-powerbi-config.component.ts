@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, Input, isDevMode, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertService, gettext } from '@c8y/ngx-components';
-import { HttpService } from '../http.service';
+import {Component, Input, isDevMode, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AlertService, gettext} from '@c8y/ngx-components';
+import {HttpService} from '../http.service';
 import {PowerBIReport, PowerBIReports, PowerBIWorkspace} from '../powerbi.interface';
-import { PowerBIService } from '../powerbi.service';
+import {PowerBIService} from '../powerbi.service';
 
 export interface ConfigType {
   powerBIEndPoint: string,
@@ -42,7 +42,7 @@ export class GpPowerbiConfigComponent implements OnInit {
   public visibleReports?: PowerBIReports;
   public form: FormGroup;
   public isLoading = false;
-
+  public isAdvancedExpanded = false;
   public error = '';
   constructor(
     private powerbiService: PowerBIService,
@@ -50,12 +50,7 @@ export class GpPowerbiConfigComponent implements OnInit {
     private alertService: AlertService,
     private http: HttpService
   ) {
-    this.form = this.fb.group({
-      workspace: this.fb.control(null, Validators.required),
-      report: this.fb.control(null, Validators.required)
-    });
-    this.workspaces = [];
-    this.reports = {};
+
   }
   async ngOnInit(): Promise<void> {
     if (this.config.isNavPaneEnabled == null) {
@@ -79,6 +74,19 @@ export class GpPowerbiConfigComponent implements OnInit {
     } else {
       if (isDevMode()) { console.log(this.config.embedEndPoint); }
     }
+    this.form = this.fb.group({
+      connection: this.fb.group({
+        powerBIEndPoint: this.fb.control(this.config.powerBIEndPoint, Validators.required),
+        datahubEndPoint: this.fb.control(this.config.datahubEndPoint, Validators.required),
+        embedEndPoint: this.fb.control(this.config.embedEndPoint, Validators.required)
+      }),
+      isFilterEnabled: this.fb.control(this.config.isFilterPaneEnabled),
+      isNavPaneEnabled: this.fb.control(this.config.isNavPaneEnabled),
+      workspace: this.fb.control(null, Validators.required),
+      report: this.fb.control(null, Validators.required)
+    });
+    this.workspaces = [];
+    this.reports = {};
     await this.setUrlAndGetWorkspace();
   }
 
@@ -150,6 +158,17 @@ export class GpPowerbiConfigComponent implements OnInit {
     this.form.controls["report"].valueChanges.subscribe((reportValue: PowerBIReport) => {
       this.config.report = reportValue;
     });
+    this.form.controls["isFilterEnabled"].valueChanges.subscribe((newValue) => {
+      this.config.isFilterPaneEnabled = newValue;
+    });
+    this.form.controls["isNavPaneEnabled"].valueChanges.subscribe((newValue) => {
+      this.config.isNavPaneEnabled = newValue;
+    })
+    this.form.controls["connection"].valueChanges.subscribe((value) => {
+      this.config.datahubEndPoint = value.datahubEndPoint;
+      this.config.embedEndPoint = value.embedEndPoint;
+      this.config.powerBIEndPoint = value.powerBIEndPoint;
+    })
   }
 
   // Fetch the Reports for Workspace and show those
